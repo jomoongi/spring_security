@@ -25,7 +25,7 @@
 					default-target-url="/main"
 					authentication-failure-handler-ref="loginFailureHandler" />
 
-		<!-- 권한이 없는 user가 접근하려고할때 accessDenied 페이지로 이동 -->
+		<!-- 권한이 없는 user가 접근하려고할때 accessDenied 페이지로 이동 --> 
 		<access-denied-handler error-page="/accessDenied" />
 
 		<!-- logout 시 loginPage로 이동 -->
