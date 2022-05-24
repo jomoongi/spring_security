@@ -17,4 +17,11 @@ public class LoginCtrl {
 		return "login";
 	}
 	
+    @RequestMapping(value="/accessDenied")
+    public String accessDeniedPage() throws Exception {
+    	
+    	logger.debug("권한불충분");
+    	
+        return "accessDenied";
+    }
 }

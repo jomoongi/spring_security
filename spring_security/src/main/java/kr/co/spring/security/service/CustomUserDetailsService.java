@@ -29,19 +29,23 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		CustomUserDetails customUserDetails = new CustomUserDetails();
 		
-        if(param.get("ts_title")==null) {
-            throw new UsernameNotFoundException(username);
-        }else {
-        	customUserDetails.setUSERNAME(param.get("ts_title").toString());
-        	customUserDetails.setPASSWORD("a");
-        	if(param.get("ts_title").toString().equals("user")) {
-        		customUserDetails.setAUTHORITY("ROLE_USER");
-        	}else {
-        		customUserDetails.setAUTHORITY("ROLE_ADMIN");
-        	}
-        	customUserDetails.setENABLED(true);
-        }
-
+		try {
+			if(param.get("ts_title")==null) {
+				throw new UsernameNotFoundException(username);
+			}else {
+				customUserDetails.setUSERNAME(param.get("ts_title").toString());
+				customUserDetails.setPASSWORD("a");
+				if(param.get("ts_title").toString().equals("user")) {
+					customUserDetails.setAUTHORITY("ROLE_USER");
+				}else {
+					customUserDetails.setAUTHORITY("ROLE_ADMIN");
+				}
+				customUserDetails.setENABLED(true);
+			}
+			
+		} catch (Exception e) {
+			logger.debug("error : " + e);
+		}
 		
 		return customUserDetails;
 	}

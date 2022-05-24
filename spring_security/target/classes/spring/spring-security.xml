@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/security
+                                 http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http auto-config="true" use-expressions="true">
+		<intercept-url pattern="/member/**"	access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')" />
+		<intercept-url pattern="/user/**"	access="hasAnyRole('ROLE_USER','ROLE_MEMBER','ROLE_ADMIN')" />
+		<intercept-url pattern="/main/**"	access="hasAnyRole('ROLE_USER','ROLE_MEMBER','ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/**"	access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/**" 		access="permitAll" />
+
+		<!-- 권한 설정 -->
+		<!-- login-page는 id/pw를 잘못입력하거나 아무것도 입력안했을경우 이동시켜주는 경로 성공적으로 로그인할경우 default-target-url로 이동 -->
+		<!-- 어떤경로를 들어오든 intercept해서 /loginPage로 보낸다 -->
+		<!-- parameter는 jsp id/name이랑 동일 이 파라미터로 provider로 보낸다 -->
+		<form-login username-parameter="username" 
+					password-parameter="password"
+					login-page="/loginPage"
+					default-target-url="/main"
+					authentication-failure-handler-ref="loginFailureHandler" />
+
+		<!-- 권한이 없는 user가 접근하려고할때 accessDenied 페이지로 이동 --> 
+		<access-denied-handler error-page="/accessDenied" />
+
+		<!-- logout 시 loginPage로 이동 -->
+		<logout logout-url="/logout" logout-success-url="/loginPage" />
+
+	</http>
+
+	<authentication-manager>
+		<authentication-provider ref="CustomAuthenticationProvider"/>
+<!-- 		<authentication-provider user-service-ref="customUserSevice"> -->
+<!-- 			<user-service> -->
+<!-- 				<user name="user" password="user" authorities="ROLE_USER" /> -->
+<!-- 				<user name="member" password="member" authorities="ROLE_MEMBER" /> -->
+<!-- 				<user name="admin" password="admin" authorities="ROLE_ADMIN" /> -->
+<!-- 			</user-service> -->
+<!-- 		</authentication-provider> -->
+	</authentication-manager>
+
+
+</beans:beans>
+
+

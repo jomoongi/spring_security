@@ -62,7 +62,7 @@
 
     <font color="red">
         <p>Your login attempt was not successful due to <br/>
-            ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</p>
+            ${errormsg}</p>
         <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
     </font>
 
