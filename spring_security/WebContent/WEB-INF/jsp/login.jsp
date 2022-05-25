@@ -66,6 +66,7 @@
         <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
     </font>
 
+<a href="./main">main 페이지 이동</a>
 
 </div>
 </div>

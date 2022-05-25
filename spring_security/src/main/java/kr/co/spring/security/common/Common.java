@@ -17,14 +17,32 @@ import org.apache.commons.collections.map.MultiValueMap;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Component
 public class Common {
 
+	/**
+	 * object 객체에 대한 null 체크
+	 * @param obj
+	 * @return
+	 */
+	public boolean isEmpty(Object obj) {
+		
+		if (obj == null) {return true;}
+		if ((obj instanceof String) && (((String)obj).trim().length() == 0)) {return true;}
+		if (obj instanceof Map) {return ((Map<?, ?>)obj).isEmpty();}
+		if (obj instanceof List) {return ((List<?>)obj).isEmpty();}
+		if (obj instanceof Object[]) {return (((Object[])obj).length == 0);}
+		
+		return false;
+	}
+	
 	public String post(String url, String auth) throws IOException {
 		
 		String result = "";

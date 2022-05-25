@@ -18,4 +18,9 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 		return getSqlSession().selectOne("user.checkFailureCount",username);
 	}
 
+	@Override
+	public void resetFailureCnt(String username) {
+		getSqlSession().update("user.resetFailureCnt",username);
+	}
+
 }

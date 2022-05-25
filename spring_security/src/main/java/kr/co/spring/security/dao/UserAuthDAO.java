@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class UserAuthDAO extends SqlSessionDaoSupport{
 
-	public Map<String, Object> getUser(String value) {
-		return getSqlSession().selectOne("user.getUser", value);
+	public Map<String, Object> getUser(String username) {
+		return getSqlSession().selectOne("user.getUser", username);
 	}
 }

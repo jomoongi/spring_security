@@ -8,6 +8,7 @@
                                  http://www.springframework.org/schema/security
                                  http://www.springframework.org/schema/security/spring-security.xsd">
 
+	<!--  entry-point-ref="customAuthenticationEntryPoint" 우선 주석처리 원래는 db에 없는 회원일경우 호출되게끔 하려고함 -->
 	<http auto-config="true" use-expressions="true">
 		<intercept-url pattern="/member/**"	access="hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')" />
 		<intercept-url pattern="/user/**"	access="hasAnyRole('ROLE_USER','ROLE_MEMBER','ROLE_ADMIN')" />
@@ -22,8 +23,8 @@
 		<form-login username-parameter="username" 
 					password-parameter="password"
 					login-page="/loginPage"
-					default-target-url="/main"
-					authentication-failure-handler-ref="loginFailureHandler" />
+					authentication-failure-handler-ref="loginFailureHandler"
+					authentication-success-handler-ref="loginSuccessHandler" />
 
 		<!-- 권한이 없는 user가 접근하려고할때 accessDenied 페이지로 이동 --> 
 		<access-denied-handler error-page="/accessDenied" />

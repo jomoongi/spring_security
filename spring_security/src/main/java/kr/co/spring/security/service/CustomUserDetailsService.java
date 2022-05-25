@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired private UserAuthDAO userAuthDAO;
 
+	@SuppressWarnings("unused")
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
@@ -29,22 +31,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		CustomUserDetails customUserDetails = new CustomUserDetails();
 		
-		try {
-			if(param.get("ts_title")==null) {
-				throw new UsernameNotFoundException(username);
-			}else {
-				customUserDetails.setUSERNAME(param.get("ts_title").toString());
-				customUserDetails.setPASSWORD("a");
-				if(param.get("ts_title").toString().equals("user")) {
-					customUserDetails.setAUTHORITY("ROLE_USER");
-				}else {
-					customUserDetails.setAUTHORITY("ROLE_ADMIN");
-				}
-				customUserDetails.setENABLED(true);
-			}
+		if(param == null) {
+			throw new InternalAuthenticationServiceException(username);
+		}else {
 			
-		} catch (Exception e) {
-			logger.debug("error : " + e);
+			customUserDetails.setUSERNAME(param.get("ts_title").toString());
+			customUserDetails.setPASSWORD("a");
+			if(param.get("ts_title").toString().equals("user")) {
+				customUserDetails.setAUTHORITY("ROLE_USER");
+			}else {
+				customUserDetails.setAUTHORITY("ROLE_ADMIN");
+			}
+			customUserDetails.setENABLED(true);
 		}
 		
 		return customUserDetails;

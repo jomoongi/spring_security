@@ -9,30 +9,34 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd">
-	
-	<!-- 
-	RequestMapping, ModelAttribute, SessionAttribute, RequestParam 등 MVC에서 사용되는 Annotation사용을 위해	
-	이름에 맞게 알아서 잘 처리해 달라고 스프링에 요청할수있다.(이걸 넣어두는게 작업할때 편함) -->
+
+	<!-- RequestMapping, ModelAttribute, SessionAttribute, RequestParam 등 MVC에서 
+		사용되는 Annotation사용을 위해 이름에 맞게 알아서 잘 처리해 달라고 스프링에 요청할수있다.(이걸 넣어두는게 작업할때 편함) -->
 	<mvc:annotation-driven />
-	
-	<!-- ** : 0개 이상의 디렉토리와 매칭
-	 	  * : 0개 이상의 문자와 매칭 -->
+
+	<!-- ** : 0개 이상의 디렉토리와 매칭 * : 0개 이상의 문자와 매칭 -->
 	<mvc:resources mapping="**" location="/" />
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
-	<context:annotation-config/>
-	<context:component-scan base-package="kr.co.spring.security" />
-	<!-- kr.co.todaysystems.scbk.itsm.rest/sbm 에 있는 것들을 스캔한다!-->
-	    
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-   			 <!-- ./로 사용자가 들어오면 실제로 존재하는지 맞춰봐야하니까 맞는지 맵핑해준다. -->
-    	
-	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
+
+	<context:annotation-config />
+	<context:component-scan
+		base-package="kr.co.spring.security" />
+	<!-- kr.co.todaysystems.scbk.itsm.rest/sbm 에 있는 것들을 스캔한다! -->
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<!-- ./로 사용자가 들어오면 실제로 존재하는지 맞춰봐야하니까 맞는지 맵핑해준다. -->
+
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="viewResolvers">
 			<list>
-				<!--  Excel Beans View  -->
-				<bean id="beanNameResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+				<!-- Excel Beans View -->
+				<bean id="beanNameResolver"
+					class="org.springframework.web.servlet.view.BeanNameViewResolver">
 					<property name="order" value="0" />
 				</bean>
 
@@ -40,21 +44,28 @@
 					class="org.springframework.web.servlet.view.BeanNameViewResolver">
 					<property name="order" value="1" />
 				</bean>
-				
-				
-				<!-- InternalResourceViewResolver : 나중에 모듈이 abc.jsp를 보낼때 abc 이렇게만 보낸다
-								  그렇지만 실제 주소는 abc.jsp이므로 /와 .jsp 라는게 필요함
-	 			-->
+
+
+				<!-- InternalResourceViewResolver : 나중에 모듈이 abc.jsp를 보낼때 abc 이렇게만 보낸다 
+					그렇지만 실제 주소는 abc.jsp이므로 /와 .jsp 라는게 필요함 -->
 				<bean id="jspViewResolver"
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 					<property name="viewClass"
 						value="org.springframework.web.servlet.view.JstlView" />
-					<property name="prefix" value="/WEB-INF/jsp/" /><!-- WEB-INF/jsp/까지 경로를 잡아준다 -->
+					<property name="prefix" value="/WEB-INF/jsp/" /><!-- WEB-INF/jsp/까지 
+						경로를 잡아준다 -->
 					<property name="suffix" value=".jsp" />
 					<property name="order" value="2" />
 				</bean>
 			</list>
 		</property>
 	</bean>
-	
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean id="commonInterceptor" class="kr.co.spring.security.interceptor.CommonInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
 </beans>

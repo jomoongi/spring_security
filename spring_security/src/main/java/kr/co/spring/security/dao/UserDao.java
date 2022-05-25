@@ -5,4 +5,6 @@ public interface UserDao {
 	public void countFailure(String username);
 	
 	public int checkFailureCount(String username);
+	
+	public void resetFailureCnt(String username);
 }

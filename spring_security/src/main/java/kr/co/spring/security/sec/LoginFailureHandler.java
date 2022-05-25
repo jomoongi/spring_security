@@ -39,8 +39,8 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		String password = request.getParameter("password");
 		String errormsg = exception.getMessage();
 
-		logger.debug("LoginFailureHandler username : " + username);
-		logger.debug("LoginFailureHandler password : " + password);
+		logger.debug("LoginFailureHandler fail username : " + username);
+		logger.debug("LoginFailureHandler fail password : " + password);
 		logger.debug("LoginFailureHandler errormsg : " + errormsg);
 
 		request.setAttribute("username", username);
@@ -49,7 +49,11 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
 		if (exception instanceof BadCredentialsException) {											//비밀번호가 일치하지 않을 때 던지는 예외
 			int count = loginFailureCount(username);
-			request.setAttribute("errormsg", "비밀번호가 일치하지 않을 때 던지는 예외 " + count + "번 틀렸습니다");
+			if(count == 3) {
+				request.setAttribute("errormsg", count + "번 틀려서 계정 잠겼습니다");
+			}else {
+				request.setAttribute("errormsg", "비밀번호가 일치하지 않을 때 던지는 예외 " + count + "번 틀렸습니다");
+			}
 		} else if (exception instanceof InternalAuthenticationServiceException) {					//존재하지 않는 아이디일 때 던지는 예외
 			request.setAttribute("errormsg", "존재하지 않는 아이디일 때 던지는 예외");
 		} else if (exception instanceof DisabledException) {										//인증 거부 - 계정 비활성화

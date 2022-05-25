@@ -8,25 +8,34 @@
 		FROM
 		USR_USER
 		WHERE
-		TS_TITLE = #{value}
+		TS_TITLE = #{username}
 	</select>
 
-	<select id="countFailure" parameterType="String"
-		resultType="Map">
+	<update id="countFailure" parameterType="String">
 		UPDATE
 		USR_USER
 		SET
 		TS_BASE_HOLIDAY = TS_BASE_HOLIDAY + 1
 		WHERE
-		TS_TITLE = #{value}
-	</select>
-
-	<select id="checkFailureCount" parameterType="String" resultType="integer">
+		TS_TITLE = #{username}
+	</update>
+	
+	<select id="checkFailureCount" parameterType="String"
+		resultType="integer">
 		SELECT
 		TS_BASE_HOLIDAY
 		FROM
 		USR_USER
 		WHERE
-		TS_TITLE = #{value}
+		TS_TITLE = #{username}
 	</select>
+
+	<update id="resetFailureCnt" parameterType="String">
+		UPDATE
+		USR_USER
+		SET
+		TS_BASE_HOLIDAY = 0
+		WHERE
+		TS_TITLE = #{username}
+	</update>
 </mapper>

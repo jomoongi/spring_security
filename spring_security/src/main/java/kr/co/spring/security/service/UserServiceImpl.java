@@ -20,4 +20,9 @@ public class UserServiceImpl implements UserService{
 		return userDao.checkFailureCount(username);
 	}
 
+	@Override
+	public void resetFailureCnt(String username) {
+		userDao.resetFailureCnt(username);
+	}
+
 }
