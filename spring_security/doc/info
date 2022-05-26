@@ -1,0 +1,12 @@
+Deployment Assembly는 멀티 프로젝트를 이용해서 개발 진행 시 각 프로젝트의 폴더를 조립하는 기능을 담당한다 / 임시 배포 공간을 마련하는 것
+
+기존 maven project 생성시 Web Deployment Assembly에서 /WebContent 밑으로 설정 되어있음
+webapp/하위로 프로젝트 설정 시 Web Deployment Assembly에서 /WebContent 지우고 /src/main/webapp으로 변경
+
+bootstrap template 적용방법
+	1. template 다운
+	2. /webapp/resources/ 하위에 css,img,js,scss,vendor 폴더 위치시킨다
+	3. eclipse 임시배포된 경로에서 부터 경로를 잡고 한다 <script src="./resources/js/sb-admin-2.min.js"></script>
+	
+	
+<input name="_csrf" type="hidden" value="ae81defe-ccc5-41aa-8720-cd75789bdb6a"> 화면에 보인다?

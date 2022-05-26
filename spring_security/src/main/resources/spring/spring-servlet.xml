@@ -52,8 +52,7 @@
 					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 					<property name="viewClass"
 						value="org.springframework.web.servlet.view.JstlView" />
-					<property name="prefix" value="/WEB-INF/jsp/" /><!-- WEB-INF/jsp/까지 
-						경로를 잡아준다 -->
+					<property name="prefix" value="/WEB-INF/views/" /><!-- WEB-INF/jsp/까지	경로를 잡아준다 -->
 					<property name="suffix" value=".jsp" />
 					<property name="order" value="2" />
 				</bean>

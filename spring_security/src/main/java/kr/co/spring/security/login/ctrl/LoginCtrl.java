@@ -14,11 +14,11 @@ public class LoginCtrl {
 		
 		logger.debug("loginPage 입니다");
 		
-		return "login";
+		return "/login/login";
 	}
 	
     @RequestMapping(value="/accessDenied")
-    public String accessDeniedPage() throws Exception {
+    public String accessDeniedPage() {
     	
     	logger.debug("권한불충분");
     	

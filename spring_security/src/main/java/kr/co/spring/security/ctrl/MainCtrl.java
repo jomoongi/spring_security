@@ -37,6 +37,11 @@ public class MainCtrl {
 		if(principal != null) {
 			name = auth.getName();
 			logger.debug(name);
+			if(name.equals("user")) {
+				name = "유저입니다";
+			}else {
+				name = "어드민입니다";
+			}
 		}
 		modelMap.addAttribute("name", name);
 		
@@ -66,5 +71,13 @@ public class MainCtrl {
 		modelAndView.setViewName("/admin");
 		
 		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index(ModelMap modelMap)  {
+		
+		logger.debug("indexPage 입니다");
+///spring_security/src/main/webapp/resources/templates/index.html
+		return "index";
 	}
 }
