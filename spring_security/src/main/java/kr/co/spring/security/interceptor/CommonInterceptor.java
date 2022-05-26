@@ -20,10 +20,10 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-//		logger.debug("============================== START ==============================");
-//		logger.info(" Class       \t:  " + handler.getClass());
-//		logger.info(" Request URI \t:  " + request.getRequestURI());
-//		logger.info(" Servlet URI \t:  " + request.getServletPath());
+		logger.debug("============================== START ==============================");
+		logger.info(" Class       \t:  " + handler.getClass());
+		logger.info(" Request URI \t:  " + request.getRequestURI());
+		logger.info(" Servlet URI \t:  " + request.getServletPath());
 		
 		Enumeration<String> paramNames = request.getParameterNames();
 		
@@ -33,7 +33,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
 			logger.info("# RequestParameter: " + key + "=" + value + "");
 		}
 		
-//		logger.info("==================================================================== ");
+		logger.info("==================================================================== ");
 
 		return super.preHandle(request, response, handler);
 	}
@@ -54,7 +54,7 @@ public class CommonInterceptor extends HandlerInterceptorAdapter{
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
         if (logger.isDebugEnabled()) {
-//        	logger.debug("============================== END ==============================\n");
+        	logger.debug("============================== END ==============================\n");
         }
 		
 	}
