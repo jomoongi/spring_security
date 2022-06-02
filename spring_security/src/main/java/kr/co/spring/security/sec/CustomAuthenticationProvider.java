@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import kr.co.spring.security.common.Common;
 import kr.co.spring.security.service.CustomUserDetailsService;
 
-@Component("CustomAuthenticationProvider")
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	private static final Logger logger = Logger.getLogger(CustomAuthenticationProvider.class);

@@ -35,7 +35,7 @@
 	</http>
 
 	<authentication-manager>
-		<authentication-provider ref="CustomAuthenticationProvider"/>
+		<authentication-provider ref="customAuthenticationProvider"/>
 <!-- 		<authentication-provider user-service-ref="customUserSevice"> -->
 <!-- 			<user-service> -->
 <!-- 				<user name="user" password="user" authorities="ROLE_USER" /> -->

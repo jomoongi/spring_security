@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.spring.security.service.UserService;
 
-@Component("loginFailureHandler")
+@Component
 public class LoginFailureHandler implements AuthenticationFailureHandler {
 
 	private static final Logger logger = Logger.getLogger(LoginFailureHandler.class);

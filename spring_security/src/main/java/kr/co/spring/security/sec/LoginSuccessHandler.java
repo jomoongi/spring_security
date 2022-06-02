@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 import kr.co.spring.security.service.UserService;
 
-@Component("loginSuccessHandler")
+@Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	private static final Logger logger = Logger.getLogger(LoginSuccessHandler.class);
